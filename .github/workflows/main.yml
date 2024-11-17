@@ -1,0 +1,63 @@
+name: Custom Workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print "Hello" message
+        run: echo "Hello"
+
+      - name: Print version of Ubuntu
+        run: lsb_release -a || cat /etc/issue
+
+      - name: Print SHA of commit
+        run: echo "Commit SHA: ${{ github.sha }}"
+
+  Job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print all files in the repository
+        run: |
+          echo "Listing all files:"
+          ls -la
+
+      - name: Print contents of all text files
+        run: |
+          echo "Contents of text files:"
+          cat *.txt
+
+      - name: Run test.sh
+        run: |
+          chmod +x test.sh
+          ./test.sh
+
+  Job3:
+    runs-on: ubuntu-latest
+    env:
+      FIRST_NAME: ${{ env.FIRST_NAME }}
+    steps:
+      - name: Print First Name (using env)
+        run: echo "First Name: $FIRST_NAME"
+        env:
+          FIRST_NAME: ${{ env.FIRST_NAME }}
+
+      - name: Print Last Name (using local variable)
+        run: |
+          LAST_NAME="Doe"
+          echo "Last Name: $LAST_NAME"
+
+      - name: Print Phone Number (using secret)
+        run: echo "Phone Number: $PHONE_NUMBER"
+        env:
+          PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
