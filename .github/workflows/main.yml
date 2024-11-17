@@ -43,12 +43,12 @@ jobs:
   Job3:
     runs-on: ubuntu-latest
     env:
-      FIRST_NAME: ${{ env.FIRST_NAME }}
+      FIRST_NAME: ${{ vars.FIRST_NAME }}
     steps:
       - name: Print First Name (using env)
         run: 'echo "First Name: $FIRST_NAME"'
         env:
-          FIRST_NAME: ${{ env.FIRST_NAME }}
+          FIRST_NAME: ${{ vars.FIRST_NAME }}
 
       - name: Print Last Name (using local variable)
         run: |
