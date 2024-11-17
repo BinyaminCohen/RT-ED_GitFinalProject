@@ -3,7 +3,7 @@ name: Custom Workflow
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   Job1:
@@ -17,9 +17,6 @@ jobs:
 
       - name: Print version of Ubuntu
         run: lsb_release -a || cat /etc/issue
-
-      - name: Print SHA of commit
-        run: echo "Commit SHA: ${{ github.sha }}"
 
   Job2:
     runs-on: ubuntu-latest
