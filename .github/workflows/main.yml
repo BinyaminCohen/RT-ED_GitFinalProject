@@ -4,26 +4,27 @@ on: [push]
 
 jobs:
   Job1:
+    name: Job 1 - Greeting and System Info.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Print "Hello" message
         run: echo "Hello"
 
-      - name: Print version of Ubuntu
+      - name: Print version of Ubuntu.
         run: lsb_release -a || cat /etc/issue
 
       - name: Print SHA of commit
-        run: 'echo "Commit SHA: ${{ github.sha }}"' 
-
+        run: 'echo "Commit SHA: ${{ github.sha }}"'
 
   Job2:
+    name: Job 2 - List Files and Run Script.
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Print all files in the repository
         run: |
@@ -41,9 +42,8 @@ jobs:
           ./test.sh
 
   Job3:
+    name: Job 3 - Print Personal Information.
     runs-on: ubuntu-latest
-    env:
-      FIRST_NAME: ${{ vars.FIRST_NAME }}
     steps:
       - name: Print First Name (using env)
         run: 'echo "First Name: $FIRST_NAME"'
@@ -52,7 +52,7 @@ jobs:
 
       - name: Print Last Name (using local variable)
         run: |
-          LAST_NAME="Doe"
+          LAST_NAME="Cohen"
           echo "Last Name: $LAST_NAME"
 
       - name: Print Phone Number (using secret)
